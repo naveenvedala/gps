@@ -18,6 +18,7 @@ eventEmitter.on('gps_data', function(data) {
   setImmediate(function(data) {
       console.log('EVENT async "gps_data" : ' + data.length);
       //  save into DB logic goes here
+    console.log('Inconnection');
       console.log(data);
       console.log(data.toString());
   }, data);
