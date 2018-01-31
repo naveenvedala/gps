@@ -5,39 +5,21 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var gpsServer = require('gps-server');
+
+var index = require('./routes/index');
+var users = require('./routes/users');
 var server = require ('tk102');
 
 server.createServer ({
   port: 8081
 });
-var index = require('./routes/index');
-var users = require('./routes/users');
 
-
-
-var events = require('events');
-
-
-// Create an eventEmitter object
-var eventEmitter = new events.EventEmitter();
 var app = express();
-// gpsServer();
 
-//  handle data processed and returned by gps-server
-
-// eventEmitter.on('gps_data', function(data) {
-//   //  preferably, handle data asynchronously, to not affect on gps-server
-//   setImmediate(function(data) {
-//       console.log('EVENT async "gps_data" : ' + data.length);
-//       //  save into DB logic goes here
-//       console.log(data);
-//       console.log(data.toString());
-//   }, data);
-// });
 
 server.on ('track', function (gps) {
   console.log(gps)
-
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -71,7 +53,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.listen(8080, ()=>{
-  console.log("Server running")
+
+app.listen(8080,()=>{
+  console.log("Server Running")
 })
+
 module.exports = app;
