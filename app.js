@@ -8,7 +8,10 @@ var gpsServer = require('gps-server');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var events = require('events');
 
+// Create an eventEmitter object
+var eventEmitter = new events.EventEmitter();
 var app = express();
 gpsServer();
 
